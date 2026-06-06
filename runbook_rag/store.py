@@ -53,14 +53,15 @@ def search(
     conn: sqlite3.Connection, query_vector: list[float], top_k: int = 3
 ) -> list[tuple[str, str, float]]:
     """Return the top_k nearest documents as (path, body, distance) tuples."""
+    # sqlite-vec KNN queries require the result count as a `k = ?` constraint;
+    # a bound `LIMIT ?` is not recognised by the vec0 query planner.
     rows = conn.execute(
         """
         SELECT docs.path, docs.body, doc_vec.distance
         FROM doc_vec
         JOIN docs ON docs.id = doc_vec.id
-        WHERE doc_vec.embedding MATCH ?
+        WHERE doc_vec.embedding MATCH ? AND k = ?
         ORDER BY doc_vec.distance
-        LIMIT ?
         """,
         (_vec_to_blob(query_vector), top_k),
     ).fetchall()
