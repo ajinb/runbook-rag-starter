@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.16,<0.17"]
+dev = ["pytest>=8", "ruff>=0.16,<0.18"]
 
 [project.scripts]
 runbook-rag = "runbook_rag.cli:main"
