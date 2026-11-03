@@ -25,6 +25,11 @@ export ANTHROPIC_API_KEY=sk-ant-...
 export OPENAI_API_KEY=sk-...
 ```
 
+
+> **macOS note:** the python.org installers build `sqlite3` without loadable-extension support, so
+> sqlite-vec cannot load (`open_db` says so explicitly). Use Homebrew Python, a `uv`-managed
+> Python (`uv venv -p 3.12`), or pyenv.
+
 ## Use
 
 ```bash

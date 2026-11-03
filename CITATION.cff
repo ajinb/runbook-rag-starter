@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "runbook-rag-starter"
+message: "If you use this software, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: Baby
+    given-names: Ajin
+    orcid: "https://orcid.org/0009-0007-6190-9516"
+repository-code: "https://github.com/ajinb/runbook-rag-starter"
+url: "https://cloudandsre.com"
+abstract: "The smallest useful RAG, in 40 lines \u2014 a Markdown folder, sqlite-vec, and a CLI. Companion to the 'What is RAG?' primer at cloudandsre.com."
+license: Apache-2.0
+version: "0.1.0"
+date-released: "2026-11-03"
+keywords:
+  - rag
+  - sqlite-vec
+  - runbooks
+  - sre
+  - llm

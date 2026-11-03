@@ -13,7 +13,7 @@ from anthropic import Anthropic
 from runbook_rag.embed import embed
 from runbook_rag.store import open_db, search, upsert
 
-_ANSWER_MODEL = os.environ.get("RUNBOOK_RAG_ANSWER_MODEL", "claude-sonnet-4-6")
+_ANSWER_MODEL = os.environ.get("RUNBOOK_RAG_ANSWER_MODEL", "claude-sonnet-5-5")
 _TOP_K = int(os.environ.get("RUNBOOK_RAG_TOP_K", "3"))
 
 _SYSTEM_PROMPT = """You are an SRE assistant answering questions from a curated set of runbooks.
@@ -51,7 +51,7 @@ def ask(question: str, db_path: str) -> tuple[str, list[str]]:
     client = Anthropic()
     response = client.messages.create(
         model=_ANSWER_MODEL,
-        max_tokens=1024,
+        max_tokens=4096,  # thinking counts against this on current models
         system=_SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user}],
     )
