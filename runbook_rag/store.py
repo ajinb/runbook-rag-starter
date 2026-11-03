@@ -18,6 +18,13 @@ def _vec_to_blob(v: Iterable[float]) -> bytes:
 def open_db(path: str) -> sqlite3.Connection:
     """Open (or create) the database and ensure the schema exists."""
     conn = sqlite3.connect(path)
+    if not hasattr(conn, "enable_load_extension"):
+        # python.org's macOS installers build sqlite3 without loadable-extension support.
+        raise RuntimeError(
+            "This Python's sqlite3 cannot load extensions, which sqlite-vec needs. "
+            "Use a Python built with extension loading (Homebrew, uv-managed, pyenv, or "
+            "most Linux distributions) — see 'Install' in the README."
+        )
     conn.enable_load_extension(True)
     sqlite_vec.load(conn)
     conn.enable_load_extension(False)
